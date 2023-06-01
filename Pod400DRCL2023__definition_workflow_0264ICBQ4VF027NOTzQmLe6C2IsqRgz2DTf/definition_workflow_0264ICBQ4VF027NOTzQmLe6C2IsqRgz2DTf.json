@@ -1,0 +1,815 @@
+{
+  "workflow": {
+    "unique_name": "definition_workflow_0264ICBQ4VF027NOTzQmLe6C2IsqRgz2DTf",
+    "name": "Pod400-dr-beast-mode-Parent",
+    "title": "Pod400-dr-beast-mode-Parent",
+    "type": "generic.workflow",
+    "base_type": "workflow",
+    "variables": [
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "local",
+          "name": "results_jsonpath",
+          "type": "datatype.string",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_0264IUK3RWFOQ42iHtFFHfViu87Gbne2FGm",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "observable_value",
+          "type": "datatype.string",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_0264J5N5L6OTN4YSK1jO6RSc2JMBHxkrXzv",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "observable_type",
+          "type": "datatype.string",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_0264J5BFEFGRE1x5kKpBs5Nas8XeKPbP0NL",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "local",
+          "name": "results_loop",
+          "type": "datatype.string",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_0264ILXDK0NKB4GguW3Xj8pegaeGpptN13J",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "Bret",
+          "scope": "local",
+          "name": "username",
+          "type": "datatype.string",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_0264IDDSH9GZ03kZFf9PrejxVGNNXXppu7Z",
+        "object_type": "variable_workflow"
+      }
+    ],
+    "properties": {
+      "atomic": {
+        "is_atomic": false
+      },
+      "delete_workflow_instance": false,
+      "display_name": "Pod400-dr-beast-mode-Parent",
+      "runtime_user": {
+        "target_default": true
+      },
+      "target": {
+        "target_type": "web-service.endpoint",
+        "target_id": "definition_target_0264I1NQMZ47H2vuCN8JKI7yPQGeye8ZfF7",
+        "execute_on_workflow_target": true
+      }
+    },
+    "object_type": "definition_workflow",
+    "actions": [
+      {
+        "unique_name": "definition_activity_0264ID2WSHH8Z7Ko2JqEKAonFhpp28bLdbo",
+        "name": "pod400-dr-beast-mode-atomic",
+        "title": "pod400-dr-beast-mode-atomic",
+        "type": "workflow.atomic_workflow",
+        "base_type": "subworkflow",
+        "properties": {
+          "display_name": "pod400-dr-beast-mode-atomic",
+          "input": {
+            "variable_workflow_0264I7U3VWAB86VRQpM9dkaoFZx2es1euaT": "users"
+          },
+          "runtime_user": {
+            "target_default": true
+          },
+          "target": {
+            "execute_on_this_target": true,
+            "target_id": "definition_target_0264I1NQMZ47H2vuCN8JKI7yPQGeye8ZfF7",
+            "target_type": "web-service.endpoint"
+          },
+          "workflow_id": "definition_workflow_0264I6S6VZR7E475dqpQpAStsTZzvf1k3ZJ",
+          "workflow_name": "pod400-dr-beast-mode-atomic"
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_0264IDICQCEZ45Gv7NtBZVW1cvhblxIpVWX",
+        "name": "Read Table from JSON",
+        "title": "Read Table from JSON",
+        "type": "corejava.read_table_from_json",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": false,
+          "display_name": "Read Table from JSON",
+          "input_json": "$activity.definition_activity_0264ID2WSHH8Z7Ko2JqEKAonFhpp28bLdbo.output.variable_workflow_0264IBC1TUIE40BhWZsV8FVYI6ysh9sR7Tm$",
+          "jsonpath_query": "$.",
+          "persist_output": true,
+          "populate_columns": false,
+          "skip_execution": false,
+          "table_columns": [
+            {
+              "column_name": "username",
+              "column_type": "string"
+            },
+            {
+              "column_name": "name",
+              "column_type": "string"
+            }
+          ]
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_0264IEMSE6XO16cqsCiqqDzy7JUXgcHDutl",
+        "name": "Write Data to DB",
+        "title": "Write Data to DB",
+        "type": "workflow.atomic_workflow",
+        "base_type": "subworkflow",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "Write Data to DB",
+          "input": {
+            "variable_workflow_01P0GS2SYRNAD5djU4I0EmDyh4Y5moK99Mr": "CiscoLive2023",
+            "variable_workflow_01P0GS9ADS0FB2p5ZH16T37LUc5yub2YWhi": "Pod400",
+            "variable_workflow_01P0GSK7IBUCF1egLmUv3sAxTwOtmvwiqus": "{\n\"workflowId\": \"$workflow.definition_workflow_0264ICBQ4VF027NOTzQmLe6C2IsqRgz2DTf.output.instance_id$\",\n\"output\": $activity.definition_activity_0264ID2WSHH8Z7Ko2JqEKAonFhpp28bLdbo.output.variable_workflow_0264IBC1TUIE40BhWZsV8FVYI6ysh9sR7Tm$,\n\"$currentDate\": { \"lastModified\": true}\n}",
+            "variable_workflow_01Q8N6BMRXR1F4IwAmNFn19l4XpB4LuqUWg": false
+          },
+          "runtime_user": {
+            "target_default": true
+          },
+          "skip_execution": false,
+          "target": {
+            "execute_on_this_target": true,
+            "target_id": "definition_target_01XRDVM4WWH4B6v4FSxN6q8ZJzj0kZcTYZ8",
+            "target_type": "web-service.endpoint"
+          },
+          "workflow_id": "definition_workflow_01P0GR3W6BLFK0lH4HekJSKaPcftY2an66W",
+          "workflow_name": "Create_Document_In_Mongo-RestHeart"
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_0264IK5JCDX911vhd14ZOlfS5xkQHCbDey0",
+        "name": "For Each",
+        "title": "For Each",
+        "type": "logic.for_each",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "For Each",
+          "skip_execution": false,
+          "source_array": "$activity.definition_activity_0264IDICQCEZ45Gv7NtBZVW1cvhblxIpVWX.output.read_table_from_json$"
+        },
+        "object_type": "definition_activity",
+        "actions": [
+          {
+            "unique_name": "definition_activity_0264IKDE09VYD3hQxfGTphhPTEJvOErJwFN",
+            "name": "Condition Block",
+            "title": "If Name Found?",
+            "type": "logic.if_else",
+            "base_type": "activity",
+            "properties": {
+              "continue_on_failure": false,
+              "display_name": "If Name Found?",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "blocks": [
+              {
+                "unique_name": "definition_activity_0264IKDENN3IT2wnCHxgLrif9ECqC329sGQ",
+                "name": "Condition Branch",
+                "title": "Then",
+                "type": "logic.condition_block",
+                "base_type": "activity",
+                "properties": {
+                  "condition": {
+                    "left_operand": "$activity.definition_activity_0264IK5JCDX911vhd14ZOlfS5xkQHCbDey0.input.source_array[@].username$",
+                    "operator": "eq",
+                    "right_operand": "$workflow.definition_workflow_0264ICBQ4VF027NOTzQmLe6C2IsqRgz2DTf.local.variable_workflow_0264IDDSH9GZ03kZFf9PrejxVGNNXXppu7Z$"
+                  },
+                  "continue_on_failure": false,
+                  "display_name": "Then",
+                  "skip_execution": false
+                },
+                "object_type": "definition_activity",
+                "actions": [
+                  {
+                    "unique_name": "definition_activity_0264IM00SVEVH6SpeVbmxn2mvWsjxO4PzFA",
+                    "name": "Set Variables",
+                    "title": "Set local results loop",
+                    "type": "core.set_multiple_variables",
+                    "base_type": "activity",
+                    "properties": {
+                      "continue_on_failure": false,
+                      "display_name": "Set local results loop",
+                      "skip_execution": false,
+                      "variables_to_update": [
+                        {
+                          "variable_to_update": "$workflow.definition_workflow_0264ICBQ4VF027NOTzQmLe6C2IsqRgz2DTf.local.variable_workflow_0264ILXDK0NKB4GguW3Xj8pegaeGpptN13J$",
+                          "variable_value_new": "We found $activity.definition_activity_0264IK5JCDX911vhd14ZOlfS5xkQHCbDey0.input.source_array[@].name$ by their username $workflow.definition_workflow_0264ICBQ4VF027NOTzQmLe6C2IsqRgz2DTf.local.variable_workflow_0264IDDSH9GZ03kZFf9PrejxVGNNXXppu7Z$"
+                        }
+                      ]
+                    },
+                    "object_type": "definition_activity"
+                  },
+                  {
+                    "unique_name": "definition_activity_0264IMLXDVX892aSBz7TVRU2P2P1YOwUBvL",
+                    "name": "Write File",
+                    "title": "Write File",
+                    "type": "terminal.write_file",
+                    "base_type": "activity",
+                    "properties": {
+                      "action_timeout": 180,
+                      "content": "$workflow.definition_workflow_0264ICBQ4VF027NOTzQmLe6C2IsqRgz2DTf.local.variable_workflow_0264ILXDK0NKB4GguW3Xj8pegaeGpptN13J$",
+                      "continue_on_failure": false,
+                      "display_name": "Write File",
+                      "encoding": "utf-8",
+                      "file_name": "Pod400-br-beast-mode-basic-workflow.txt",
+                      "options": "append",
+                      "runtime_user": {
+                        "target_default": true
+                      },
+                      "skip_execution": false,
+                      "target": {
+                        "override_workflow_target": true,
+                        "target_id": "definition_target_023F8QODIAHQH45ZPDa9BTEnvFnMzYbM8BZ"
+                      }
+                    },
+                    "object_type": "definition_activity"
+                  }
+                ]
+              },
+              {
+                "unique_name": "definition_activity_0264IKDF33ND55PkSTYdBLTFAXQCf1VP7VD",
+                "name": "Condition Branch",
+                "title": "Else",
+                "type": "logic.condition_block",
+                "base_type": "activity",
+                "properties": {
+                  "condition": {
+                    "left_operand": "$activity.definition_activity_0264IK5JCDX911vhd14ZOlfS5xkQHCbDey0.input.source_array[@].username$",
+                    "operator": "ne",
+                    "right_operand": "$workflow.definition_workflow_0264ICBQ4VF027NOTzQmLe6C2IsqRgz2DTf.local.variable_workflow_0264IDDSH9GZ03kZFf9PrejxVGNNXXppu7Z$"
+                  },
+                  "continue_on_failure": false,
+                  "display_name": "Else",
+                  "skip_execution": false
+                },
+                "object_type": "definition_activity",
+                "actions": [
+                  {
+                    "unique_name": "definition_activity_0264ILI1RBI2R7XSTXkjIKlIcP7Uaof8mZn",
+                    "name": "Continue",
+                    "title": "Continue",
+                    "type": "logic.continue",
+                    "base_type": "activity",
+                    "properties": {
+                      "continue_on_failure": false,
+                      "display_name": "Continue",
+                      "skip_execution": false
+                    },
+                    "object_type": "definition_activity"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "unique_name": "definition_activity_0264IO7DXBNPO5dqgQXxRoE3TbKgBXNaJDw",
+        "name": "Read Data from DB",
+        "title": "Read Data from DB",
+        "type": "workflow.atomic_workflow",
+        "base_type": "subworkflow",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "Read Data from DB",
+          "input": {
+            "variable_workflow_01P0HCYYCM2837eJCqDZuSKVosi6YMeZA4X": "CiscoLive2023",
+            "variable_workflow_01P0HD6TPPKMK2XJvR7rnTLzLKtlSjmiXsH": "Pod400",
+            "variable_workflow_01P0HEJVT3EPP5hgPXBNNn5wjxlCCoHtPKU": "",
+            "variable_workflow_01P0IYVS9ALMY45mSfXnCta3HgsZ4LST1y3": "",
+            "variable_workflow_01P0J1A1GZTT93CpJlmIRYJZjxU3mTJiOOx": "",
+            "variable_workflow_01P0J1LX7AMWJ7ZMrDUVjRtkjGSEa9btFDS": "",
+            "variable_workflow_01P0JGFZP8CQO08hHdK0ttH75ExJdv9qByt": "",
+            "variable_workflow_01P0KYCFP07GV3VjQiwMip6dg0IvnJW8c0Q": false
+          },
+          "runtime_user": {
+            "target_default": true
+          },
+          "skip_execution": false,
+          "target": {
+            "override_workflow_target": true,
+            "target_id": "definition_target_01XRDVM4WWH4B6v4FSxN6q8ZJzj0kZcTYZ8",
+            "target_type": "web-service.endpoint"
+          },
+          "workflow_id": "definition_workflow_01P0HBSJZQT0I3g3jkB3LUpwPWQRdLPdwER",
+          "workflow_name": "Get_Documents_From_Mongo-RestHeart"
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_0264IQDWE02XN6YU1QxRLZg2sxnZLGnYR1E",
+        "name": "JSONPath Query",
+        "title": "JSONPath Query",
+        "type": "corejava.jsonpathquery",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": true,
+          "display_name": "JSONPath Query",
+          "input_json": "$activity.definition_activity_0264IO7DXBNPO5dqgQXxRoE3TbKgBXNaJDw.output.variable_workflow_01P0IIOM2EO0J6mldzZf1ET7lfOkqiHQ6aB$",
+          "jsonpath_queries": [
+            {
+              "jsonpath_query": "$..[?(@.username==\"$workflow.definition_workflow_0264ICBQ4VF027NOTzQmLe6C2IsqRgz2DTf.local.variable_workflow_0264IDDSH9GZ03kZFf9PrejxVGNNXXppu7Z$\")]",
+              "jsonpath_query_name": "username",
+              "jsonpath_query_type": "string",
+              "zdate_type_format": "yyyy-MM-dd'T'HH:mm:ssZ"
+            }
+          ],
+          "skip_execution": false
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_0264IS5SXECB74kjODWxosxyylhmEt4Fzd5",
+        "name": "Execute Python Script",
+        "title": "Execute Python Script",
+        "type": "python3.script",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": true,
+          "display_name": "Execute Python Script",
+          "script": "import json\nimport sys\n\ntry:\n    blocks = json.loads(sys.argv[1])\n    for block in blocks:\n       if block['name']:\n           output = block['name']\n       else:\n           output = \"No Name Found.\"\nexcept:\n    output = \"No Name Found\"",
+          "script_arguments": [
+            "$activity.definition_activity_0264IQDWE02XN6YU1QxRLZg2sxnZLGnYR1E.output.jsonpath_queries.username$"
+          ],
+          "script_queries": [
+            {
+              "script_query": "output",
+              "script_query_name": "name_of_person",
+              "script_query_type": "string"
+            }
+          ],
+          "skip_execution": false
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_0264IT74N9E0C2H84yLX5gegqp375EE8jFW",
+        "name": "Condition Block",
+        "title": "If Name Found?",
+        "type": "logic.if_else",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "If Name Found?",
+          "skip_execution": false
+        },
+        "object_type": "definition_activity",
+        "blocks": [
+          {
+            "unique_name": "definition_activity_0264IT75OZDMS1NJiFaFT2vsVRw7knzNuJa",
+            "name": "Condition Branch",
+            "title": "Then",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": "$activity.definition_activity_0264IQDWE02XN6YU1QxRLZg2sxnZLGnYR1E.output.succeeded$",
+                "operator": "eq",
+                "right_operand": true
+              },
+              "continue_on_failure": false,
+              "display_name": "Then",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_0264IW4S3TBHI1IBsmUj30h4IIfUf8dj8SU",
+                "name": "Group",
+                "title": "Positive Group",
+                "type": "logic.group",
+                "base_type": "activity",
+                "properties": {
+                  "continue_on_failure": false,
+                  "display_name": "Positive Group",
+                  "skip_execution": false
+                },
+                "object_type": "definition_activity",
+                "actions": [
+                  {
+                    "unique_name": "definition_activity_0264IURVYUPYE4waVwqMWpE6mfGEnCoxJYF",
+                    "name": "Set Variables",
+                    "title": "Set Found",
+                    "type": "core.set_multiple_variables",
+                    "base_type": "activity",
+                    "properties": {
+                      "continue_on_failure": false,
+                      "display_name": "Set Found",
+                      "skip_execution": false,
+                      "variables_to_update": [
+                        {
+                          "variable_to_update": "$workflow.definition_workflow_0264ICBQ4VF027NOTzQmLe6C2IsqRgz2DTf.local.variable_workflow_0264IUK3RWFOQ42iHtFFHfViu87Gbne2FGm$",
+                          "variable_value_new": "We found $activity.definition_activity_0264IS5SXECB74kjODWxosxyylhmEt4Fzd5.output.script_queries.name_of_person$ by their username $workflow.definition_workflow_0264ICBQ4VF027NOTzQmLe6C2IsqRgz2DTf.local.variable_workflow_0264IDDSH9GZ03kZFf9PrejxVGNNXXppu7Z$"
+                        }
+                      ]
+                    },
+                    "object_type": "definition_activity"
+                  },
+                  {
+                    "unique_name": "definition_activity_0264IVC4SWLPP2pXFZSQGXzPLRANKMQRDKV",
+                    "name": "Send Email",
+                    "title": "Send Email",
+                    "type": "email.smtp_send_email",
+                    "base_type": "activity",
+                    "properties": {
+                      "action_timeout": 180,
+                      "body": "$workflow.definition_workflow_0264ICBQ4VF027NOTzQmLe6C2IsqRgz2DTf.local.variable_workflow_0264IUK3RWFOQ42iHtFFHfViu87Gbne2FGm$",
+                      "continue_if_one_address_valid": false,
+                      "continue_on_failure": false,
+                      "display_name": "Send Email",
+                      "from": "no-reply@gmail.com",
+                      "runtime_user": {
+                        "target_default": true
+                      },
+                      "skip_execution": false,
+                      "subject": "Beast mode ftw",
+                      "target": {
+                        "override_workflow_target": true,
+                        "target_id": "definition_target_0264I2K1HN19C6QuBpOQU8MbSjwyU8bbU9C"
+                      },
+                      "to": "shaurobe@cisco.com"
+                    },
+                    "object_type": "definition_activity"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "unique_name": "definition_activity_0264IT76HWKWG00VKEqqXGl1Iw8C7lOoDEA",
+            "name": "Condition Branch",
+            "title": "Else",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": "$activity.definition_activity_0264IQDWE02XN6YU1QxRLZg2sxnZLGnYR1E.output.succeeded$",
+                "operator": "ne",
+                "right_operand": true
+              },
+              "continue_on_failure": false,
+              "display_name": "Else",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_0264IWDLIEGIL1yEtT5sarmwyCPWSR5hQar",
+                "name": "Group",
+                "title": "Negative Group",
+                "type": "logic.group",
+                "base_type": "activity",
+                "properties": {
+                  "continue_on_failure": false,
+                  "display_name": "Negative Group",
+                  "skip_execution": false
+                },
+                "object_type": "definition_activity",
+                "actions": [
+                  {
+                    "unique_name": "definition_activity_0264IWDLIH5EF4Z4XFYUlsJR6r3UxZtXpLM",
+                    "name": "Set Variables",
+                    "title": "Set Not Found :(",
+                    "type": "core.set_multiple_variables",
+                    "base_type": "activity",
+                    "properties": {
+                      "continue_on_failure": false,
+                      "display_name": "Set Not Found :(",
+                      "skip_execution": false,
+                      "variables_to_update": [
+                        {
+                          "variable_to_update": "$workflow.definition_workflow_0264ICBQ4VF027NOTzQmLe6C2IsqRgz2DTf.local.variable_workflow_0264IUK3RWFOQ42iHtFFHfViu87Gbne2FGm$",
+                          "variable_value_new": "We did not find $workflow.definition_workflow_0264ICBQ4VF027NOTzQmLe6C2IsqRgz2DTf.local.variable_workflow_0264IDDSH9GZ03kZFf9PrejxVGNNXXppu7Z$"
+                        }
+                      ]
+                    },
+                    "object_type": "definition_activity"
+                  },
+                  {
+                    "unique_name": "definition_activity_0264IWDLIJQ4N6MNFRD62VI7CQPbNjM2flf",
+                    "name": "Send Email",
+                    "title": "Send Email",
+                    "type": "email.smtp_send_email",
+                    "base_type": "activity",
+                    "properties": {
+                      "action_timeout": 180,
+                      "body": "$workflow.definition_workflow_0264ICBQ4VF027NOTzQmLe6C2IsqRgz2DTf.local.variable_workflow_0264IUK3RWFOQ42iHtFFHfViu87Gbne2FGm$",
+                      "continue_if_one_address_valid": false,
+                      "continue_on_failure": false,
+                      "display_name": "Send Email",
+                      "from": "no-reply@gmail.com",
+                      "runtime_user": {
+                        "target_default": true
+                      },
+                      "skip_execution": false,
+                      "subject": "Beast mode ftw",
+                      "target": {
+                        "override_workflow_target": true,
+                        "target_id": "definition_target_0264I2K1HN19C6QuBpOQU8MbSjwyU8bbU9C"
+                      },
+                      "to": "shaurobe@cisco.com"
+                    },
+                    "object_type": "definition_activity"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "categories": [
+      "category_01FM7CGPZZCMY0KcvgiGjVH5UaB4y4aDJ7m",
+      "category_0264I0RAW0DWG4CzGBSHguEQSEir5vPGcwO"
+    ]
+  },
+  "categories": {
+    "category_01FM7CGPZZCMY0KcvgiGjVH5UaB4y4aDJ7m": {
+      "unique_name": "category_01FM7CGPZZCMY0KcvgiGjVH5UaB4y4aDJ7m",
+      "name": "response",
+      "title": "response",
+      "type": "basic.category",
+      "base_type": "category",
+      "category_type": "custom",
+      "object_type": "category"
+    },
+    "category_0264I0RAW0DWG4CzGBSHguEQSEir5vPGcwO": {
+      "unique_name": "category_0264I0RAW0DWG4CzGBSHguEQSEir5vPGcwO",
+      "name": "Pod400-DryRun",
+      "title": "Pod400-DryRun",
+      "type": "basic.category",
+      "base_type": "category",
+      "category_type": "custom",
+      "object_type": "category"
+    }
+  },
+  "triggers": {
+    "triggerevent_0264IZX66LPWT3DhVjawbKDJmYDqfonWSwB": {
+      "workflow_id": "definition_workflow_0264ICBQ4VF027NOTzQmLe6C2IsqRgz2DTf",
+      "name": "weebhook me bro",
+      "title": "",
+      "lowercase_name": "event.weebhook_me_bro",
+      "type": "event",
+      "base_type": "trigger",
+      "ref_id": "event_webhook_0264IZND4EB0Q7MNaE9KbXmG540vT4AOMYo",
+      "version": "1.0.0",
+      "disabled": false,
+      "unique_name": "triggerevent_0264IZX66LPWT3DhVjawbKDJmYDqfonWSwB",
+      "object_type": "triggerevent"
+    },
+    "triggerschedule_0264IYD9EYSJG4Y1MvyNOqMBcbkkGy5YpN1": {
+      "workflow_id": "definition_workflow_0264ICBQ4VF027NOTzQmLe6C2IsqRgz2DTf",
+      "name": "scheudle me bro",
+      "title": "",
+      "lowercase_name": "schedule.scheudle_me_bro",
+      "type": "schedule",
+      "base_type": "trigger",
+      "ref_id": "schedule_0264IY4DLP1QD1gM5y5Pg060p7KXQIsU0Jb",
+      "version": "1.0.0",
+      "disabled": true,
+      "unique_name": "triggerschedule_0264IYD9EYSJG4Y1MvyNOqMBcbkkGy5YpN1",
+      "object_type": "triggerschedule"
+    }
+  },
+  "events": {
+    "event_webhook_0264IZND4EB0Q7MNaE9KbXmG540vT4AOMYo": {
+      "name": "pod400-dr-webhook-me-bro",
+      "title": "pod400-dr-webhook-me-bro",
+      "type": "webhook.event",
+      "base_type": "event",
+      "object_type": "event_webhook",
+      "rule_id": "",
+      "target_id": "",
+      "webhook_id": "webhook_0264IYWG1BUPA6SaMp7uXYJJ2ELjXdA2Gfq",
+      "version": "1.0.0",
+      "properties": {
+        "title": "pod400-dr-webhook-me-bro",
+        "webhook_id": "webhook_0264IYWG1BUPA6SaMp7uXYJJ2ELjXdA2Gfq"
+      },
+      "unique_name": "event_webhook_0264IZND4EB0Q7MNaE9KbXmG540vT4AOMYo"
+    }
+  },
+  "schedules": {
+    "schedule_0264IY4DLP1QD1gM5y5Pg060p7KXQIsU0Jb": {
+      "unique_name": "schedule_0264IY4DLP1QD1gM5y5Pg060p7KXQIsU0Jb",
+      "name": "Pod400-DR-Beast-mode-schedule",
+      "type": "basic.schedule",
+      "base_type": "schedule",
+      "object_type": "schedule",
+      "rule_id": "",
+      "properties": {
+        "calendar": "calendar_recurring_1BMfMWvgiDhSjBQ7hTSyvz3NyVZ",
+        "timezone": "Etc/GMT+0",
+        "starttime": "00:00",
+        "interval_hours": 1,
+        "interval_minutes": 0,
+        "number_of_times": 23,
+        "display_name": "Pod400-DR-Beast-mode-schedule",
+        "description": ""
+      },
+      "version": "1.0.0"
+    }
+  },
+  "targets": {
+    "definition_target_01XRDVM4WWH4B6v4FSxN6q8ZJzj0kZcTYZ8": {
+      "unique_name": "definition_target_01XRDVM4WWH4B6v4FSxN6q8ZJzj0kZcTYZ8",
+      "name": "Mongo-RestHeart-API-Target-CL2023",
+      "title": "Mongo-RestHeart-API-Target-CL2023",
+      "type": "web-service.endpoint",
+      "base_type": "target",
+      "object_type": "definition_target",
+      "properties": {
+        "ao_remote_id": "025LUS8LQNSN54xBI6BZXKeeQLv1q5l8aBQ",
+        "default_runtime_user_id": "definition_runtime_user_01OY3U05D9AEN53MgdZYcq8VtQgtNBlB4PF",
+        "description": "",
+        "disable_certificate_validation": false,
+        "display_name": "Mongo-RestHeart-API-Target-CL2023",
+        "host": "173.37.29.47",
+        "ignore_proxy": false,
+        "no_runtime_user": false,
+        "port": 8080,
+        "protocol": "http"
+      }
+    },
+    "definition_target_023F8QODIAHQH45ZPDa9BTEnvFnMzYbM8BZ": {
+      "unique_name": "definition_target_023F8QODIAHQH45ZPDa9BTEnvFnMzYbM8BZ",
+      "name": "Linux box - CiscoLive2023",
+      "title": "Linux box - CiscoLive2023",
+      "type": "terminal.unix_linux_endpoint",
+      "base_type": "target",
+      "object_type": "definition_target",
+      "properties": {
+        "bash_shell": "/bin/bash",
+        "default_runtime_user_id": "definition_runtime_user_023F8QHOULJZQ6BzVbzWycrs3OBtb8RZr4M",
+        "description": "",
+        "display_name": "Linux box - CiscoLive2023",
+        "host": "ec2-107-20-71-149.compute-1.amazonaws.com",
+        "port": 22
+      }
+    },
+    "definition_target_0264I1NQMZ47H2vuCN8JKI7yPQGeye8ZfF7": {
+      "unique_name": "definition_target_0264I1NQMZ47H2vuCN8JKI7yPQGeye8ZfF7",
+      "name": "Pod400-DR-Beast-mode-http target",
+      "title": "Pod400-DR-Beast-mode-http target",
+      "type": "web-service.endpoint",
+      "base_type": "target",
+      "object_type": "definition_target",
+      "properties": {
+        "disable_certificate_validation": true,
+        "display_name": "Pod400-DR-Beast-mode-http target",
+        "host": "jsonplaceholder.typicode.com",
+        "ignore_proxy": false,
+        "no_runtime_user": true,
+        "port": 443,
+        "protocol": "https"
+      }
+    },
+    "definition_target_0264I2K1HN19C6QuBpOQU8MbSjwyU8bbU9C": {
+      "unique_name": "definition_target_0264I2K1HN19C6QuBpOQU8MbSjwyU8bbU9C",
+      "name": "pod400-dr-i-heart-smtp",
+      "title": "pod400-dr-i-heart-smtp",
+      "type": "email.smtp_endpoint",
+      "base_type": "target",
+      "object_type": "definition_target",
+      "properties": {
+        "default_runtime_user_id": "definition_runtime_user_0264I2EIY66G76u92saur2mKeq4hfJhvLfZ",
+        "display_name": "pod400-dr-i-heart-smtp",
+        "no_runtime_user": false,
+        "port": 587,
+        "protocol": "SMTP",
+        "server": "smtp.gmail.com"
+      }
+    }
+  },
+  "runtime_users": {
+    "definition_runtime_user_01OY3U05D9AEN53MgdZYcq8VtQgtNBlB4PF": {
+      "unique_name": "definition_runtime_user_01OY3U05D9AEN53MgdZYcq8VtQgtNBlB4PF",
+      "name": "CX Mongo Lab User",
+      "title": "CX Mongo Lab User",
+      "type": "runtime_user.web-service_basic_credentials",
+      "base_type": "runtime_user",
+      "object_type": "definition_runtime_user",
+      "properties": {
+        "auth_option": "Basic",
+        "basic_password": "*****",
+        "basic_username": "admin",
+        "display_name": "CX Mongo Lab User"
+      }
+    },
+    "definition_runtime_user_023F8QHOULJZQ6BzVbzWycrs3OBtb8RZr4M": {
+      "unique_name": "definition_runtime_user_023F8QHOULJZQ6BzVbzWycrs3OBtb8RZr4M",
+      "name": "Linux user",
+      "title": "Linux user",
+      "type": "runtime_user.terminal_password_credentials",
+      "base_type": "runtime_user",
+      "object_type": "definition_runtime_user",
+      "properties": {
+        "display_name": "Linux user",
+        "password": "*****",
+        "user": "sxo"
+      }
+    },
+    "definition_runtime_user_0264I2EIY66G76u92saur2mKeq4hfJhvLfZ": {
+      "unique_name": "definition_runtime_user_0264I2EIY66G76u92saur2mKeq4hfJhvLfZ",
+      "name": "pod400-dr-smtp-account",
+      "title": "pod400-dr-smtp-account",
+      "type": "runtime_user.email_credentials",
+      "base_type": "runtime_user",
+      "object_type": "definition_runtime_user",
+      "properties": {
+        "display_name": "pod400-dr-smtp-account",
+        "password": "*****",
+        "sender": "sxoatciscolive@gmail.com"
+      }
+    }
+  },
+  "atomic_workflows": [
+    "definition_workflow_0264I6S6VZR7E475dqpQpAStsTZzvf1k3ZJ",
+    "definition_workflow_01P0GR3W6BLFK0lH4HekJSKaPcftY2an66W",
+    "definition_workflow_01P0HBSJZQT0I3g3jkB3LUpwPWQRdLPdwER"
+  ],
+  "webhooks": {
+    "webhook_0264IYWG1BUPA6SaMp7uXYJJ2ELjXdA2Gfq": {
+      "name": "pod400-dr-beast-mode-webhook",
+      "title": "pod400-dr-beast-mode-webhook",
+      "type": "generic.webhook",
+      "base_type": "webhook",
+      "object_type": "webhook",
+      "version": "1.0.0",
+      "properties": {
+        "display_name": "pod400-dr-beast-mode-webhook",
+        "request_content_type": "application/json"
+      },
+      "unique_name": "webhook_0264IYWG1BUPA6SaMp7uXYJJ2ELjXdA2Gfq"
+    }
+  },
+  "remotemetas": {
+    "remote_meta_025LUS8LQQ6IT1DTHU78VhE8C4xIglKCS43": {
+      "base_type": "remote_meta",
+      "type": "generic.remote_meta",
+      "name": "shaurobe-CISCO_LIVE_US_2023",
+      "title": "shaurobe-CISCO_LIVE_US_2023",
+      "version": "1.0.0",
+      "properties": {
+        "advanced": {
+          "require_advanced": false
+        },
+        "cloud_type": "vmware",
+        "display_name": "shaurobe-CISCO_LIVE_US_2023",
+        "network": {
+          "dns_servers": "172.18.108.43,172.18.108.34",
+          "gateway": "10.122.138.193",
+          "ip_endpoint": "10.122.138.248/26",
+          "is_static_ip": true
+        },
+        "proxy": {
+          "require_proxy": false
+        }
+      },
+      "unique_name": "remote_meta_025LUS8LQQ6IT1DTHU78VhE8C4xIglKCS43",
+      "object_type": "remote_meta"
+    }
+  },
+  "dependent_workflows": [
+    "definition_workflow_0264I6S6VZR7E475dqpQpAStsTZzvf1k3ZJ",
+    "definition_workflow_01P0GR3W6BLFK0lH4HekJSKaPcftY2an66W",
+    "definition_workflow_01P0HBSJZQT0I3g3jkB3LUpwPWQRdLPdwER"
+  ]
+}
