@@ -11,32 +11,6 @@
         "properties": {
           "value": "",
           "scope": "local",
-          "name": "results_loop",
-          "type": "datatype.string",
-          "is_required": false,
-          "is_invisible": false
-        },
-        "unique_name": "variable_workflow_026741S0V49E51n8O9BQzvIhUbZ0l0XW5CN",
-        "object_type": "variable_workflow"
-      },
-      {
-        "schema_id": "datatype.string",
-        "properties": {
-          "value": "",
-          "scope": "input",
-          "name": "observable_value",
-          "type": "datatype.string",
-          "is_required": false,
-          "is_invisible": false
-        },
-        "unique_name": "variable_workflow_026755FJKOGZ102e5uO68el7zh1jRoznZYC",
-        "object_type": "variable_workflow"
-      },
-      {
-        "schema_id": "datatype.string",
-        "properties": {
-          "value": "",
-          "scope": "local",
           "name": "results_jsonpath",
           "type": "datatype.string",
           "is_required": false,
@@ -62,6 +36,19 @@
         "schema_id": "datatype.string",
         "properties": {
           "value": "",
+          "scope": "local",
+          "name": "results_loop",
+          "type": "datatype.string",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_026741S0V49E51n8O9BQzvIhUbZ0l0XW5CN",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
           "scope": "input",
           "name": "observable_type",
           "type": "datatype.string",
@@ -69,6 +56,19 @@
           "is_invisible": false
         },
         "unique_name": "variable_workflow_026755B5HJY8H1nOraP5xvNbqofcQgzOtbu",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "input",
+          "name": "observable_value",
+          "type": "datatype.string",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_026755FJKOGZ102e5uO68el7zh1jRoznZYC",
         "object_type": "variable_workflow"
       }
     ],
@@ -89,6 +89,20 @@
     },
     "object_type": "definition_workflow",
     "actions": [
+      {
+        "unique_name": "definition_activity_02675FCCGN9EM1glpPV4JzwUXJVAfuPvBIX",
+        "name": "Sleep",
+        "title": "Sleep",
+        "type": "core.sleep",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "Sleep",
+          "skip_execution": false,
+          "sleep_interval": 5
+        },
+        "object_type": "definition_activity"
+      },
       {
         "unique_name": "definition_activity_02673F4190YQB6kdCu0hU1K9ZDB8mZGoP06",
         "name": "pod400-trainer-atomic",
